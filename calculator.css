@@ -1,0 +1,97 @@
+.table { display: table; }
+.table-row { display: table-row; }
+.table-cell { display: table-cell; }
+
+.full { width: 100%; }
+.third { width: 33%; }
+
+body { 
+    background: #550000; 
+    font-size: 22px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+button {
+    color: #000;
+    background: #ccc;
+    border: 1px solid #000;
+    border-radius: 50px;
+    font-size: 1em;
+    padding: .5em .5em .75em;
+    line-height: 1em;
+    width: calc(100%/3);
+    margin: .1em auto;
+}
+
+button:focus {
+    outline:0;
+}
+
+#main {
+    width: 36%;
+    /*height: 46%;*/
+    background: #666;
+    /*position: absolute;*/
+    top: 25%;
+    left: 30%;
+    padding: 2%;
+    border: 1px solid #fff;
+    border-radius: 50px;
+    box-shadow: 0px 0px 1000px #333,
+        100px 100px 1000px #333,
+        -100px -100px 1000px #333,
+        -100px 100px 1000px #333,
+        100px -100px 1000px #333;
+}
+
+#numberContainer{
+    display: flex;
+}
+
+#ops-container{
+    display: flex;
+}
+
+#ops-container button{
+    width: calc(100%/4);
+}
+
+#opWindow {
+    background: green;
+    color: black;
+    text-align: right;
+    font-size: 2em;
+    padding: .1em 2%;
+    width: 96%;
+    min-height: 40px;
+    margin-bottom: 10px;
+}
+
+.equations-stored{
+    display: inline-block;
+    background: #666;
+    color: #fff;
+    max-height: 300px;
+    overflow: scroll;
+    box-shadow: 0 0 5px #000;
+    padding: 0 40px;
+}
+
+.equations-stored h3{
+    text-align: center;
+}
+
+.equations-stored span{
+    display: block;
+    border-bottom: 1px solid #000;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.equations-stored span:last-child{
+    border:none;
+}
+
