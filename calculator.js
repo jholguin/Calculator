@@ -29,12 +29,14 @@ function Calculator()
             },
             {
                 icon: '^',
-                iconname: 'icon-square'
+                iconname: 'icon-icon-chevron-up'
             }
         ]
         ,opWindow
         ,equalSelected = false
-        ,equationsStore = [];
+        ,equationsStore = []
+        ,baseNum
+        ,powNum;
 
 
     /**
@@ -82,7 +84,13 @@ function Calculator()
         
         equationsStore.forEach(function(val){
             var eq = document.createElement("span");
-            eq.innerHTML = val + '=' + eval(val);
+            if(val.indexOf("^") != -1){
+                var pow = val.split("^");
+                eq.innerHTML = val + "=" + Math.pow(pow[0], pow[1]); 
+            }
+            else
+                eq.innerHTML = val + '=' + eval(val);
+
             savedContainer.append(eq);
         });
 
@@ -158,7 +166,6 @@ function Calculator()
         equalSelected = false;
     }
 
-
     /**
      * @description handleClick function handles button clicks
      */
@@ -167,31 +174,40 @@ function Calculator()
         
         switch(event.target.value){
             case "=":
+                if(opWindow.innerHTML.indexOf("^") != -1){
+                    var pow = opWindow.innerHTML.split("^");
+                    var base = pow[0];
+                    var pow = pow[1];
+                    saveEquation(opWindow.innerHTML);
+                    opWindow.innerHTML = Math.pow(base, pow);
+                    equalSelected = true;
+                    break;
+                }
+                
                 if(!equalSelected){
                     saveEquation(opWindow.innerHTML);
                     opWindow.innerHTML = eval(opWindow.innerHTML);
                     equalSelected = true;
-                }else{
+                }else {
                     clearOpWindow();
                 }
-                
                 break;
             case "clear":
                 clearOpWindow();
                 break;
-            case "^":
-                saveEquation(opWindow.innerHTML);
-                opWindow.innerHTML = Math.pow(opWindow.innerHTML, 2);
-                equalSelected = true;
-                break;
             default:
-                if(!equalSelected)
-                    opWindow.innerHTML += event.target.value;
-                else{
-                    opWindow.innerHTML = event.target.value;
-                    equalSelected = false;
+
+                if(opWindow.innerHTML.length > 20){
+                    alert("Too many number");
+                    break;
                 }
 
+                if(!equalSelected)
+                    opWindow.innerHTML += this.value;
+                else {
+                    opWindow.innerHTML = this.value;
+                    equalSelected = false;
+                }
         }
     }
 
